@@ -22,8 +22,10 @@
         activate();
 
         function activate() {
-//            TODO: Using a resolver on all routes or datacontext.ready in every controller
-//            return datacontext.ready([getWipSummary()]);
+            /*
+            TODO: Using a resolver on all routes or datacontext.ready in every controller
+            return datacontext.ready([getWipSummary()]);
+            */
             getWipSummary();
             $scope.$on(config.events.storage.wipChanged, function (event, data) {
                 vm.wip = data;

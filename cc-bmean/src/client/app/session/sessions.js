@@ -26,8 +26,8 @@
         activate();
 
         function activate() {
-//            TODO: Using a resolver on all routes or datacontext.ready in every controller
-//            return datacontext.ready([getSessions()]).then(function () {
+            //TODO: Using a resolver on all routes or datacontext.ready in every controller
+            // return datacontext.ready([getSessions()]).then(function () {
             return getSessions().then(function () {
                 applyFilter = common.createSearchThrottle(vm, 'sessions');
                 if (vm.sessionsSearch) {

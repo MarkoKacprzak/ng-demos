@@ -31,10 +31,11 @@
         Object.defineProperty(vm.paging, 'pageCount', {
             get: function () {
                 var val = 1;
-    
-                if (vm.attendeeFilteredCount % vm.paging.pageSize == 0)
+
+                if (vm.attendeeFilteredCount % vm.paging.pageSize === 0) {
                     val = 0;
-    
+                }
+
                 return Math.floor(vm.attendeeFilteredCount / vm.paging.pageSize) + val;                
             }
         });
@@ -42,8 +43,8 @@
         activate();
 
         function activate() {
-//            TODO: Using a resolver on all routes or datacontext.ready in every controller
-//            return datacontext.ready([getAttendees()]);
+            //TODO: Using a resolver on all routes or datacontext.ready in every controller
+            // return datacontext.ready([getAttendees()]);
             return getAttendees();
         }
 

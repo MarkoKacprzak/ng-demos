@@ -167,7 +167,7 @@
                     breeze.saveErrorMessageService.getErrorMessage(error);
                 error.message = msg;
                 exception.catcher(msg)(error);
-//                common.logger.error(msg, error);
+                //common.logger.error(msg, error);
                 throw error;
             }
         }

@@ -5,10 +5,11 @@
 
     angular
         .module('app.widgets');
-//        .factory('testService', function(){
-//            return {
-//                ping: function(){ return 'pong'; }
-//            };
-//        });
-
+    /*
+        .factory('testService', function(){
+            return {
+                ping: function(){ return 'pong'; }
+            };
+        });
+     */
 })();

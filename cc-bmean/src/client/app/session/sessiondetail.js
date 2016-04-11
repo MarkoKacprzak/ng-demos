@@ -41,8 +41,8 @@
             onDestroy();
             onHasChanges();
             // Whether we succeed or fail, we still want to call onEveryChange
-//            TODO: Using a resolver on all routes or datacontext.ready in every controller
-//            return datacontext.ready([getRequestedSession()]).then(onEveryChange);
+            // TODO: Using a resolver on all routes or datacontext.ready in every controller
+            // return datacontext.ready([getRequestedSession()]).then(onEveryChange);
             return getRequestedSession().then(onEveryChange);
         }
 

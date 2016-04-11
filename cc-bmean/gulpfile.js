@@ -1,4 +1,5 @@
 /* jshint camelcase:false */
+/*global require,process*/
 var gulp = require('gulp');
 var common = require('./gulp/common.js');
 var karma = require('karma').server;

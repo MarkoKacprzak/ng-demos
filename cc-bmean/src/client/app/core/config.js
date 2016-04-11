@@ -98,9 +98,9 @@
                 ready: function(datacontext) {
                     return datacontext.ready();
                 }
-//                ready: ['datacontext', function (datacontext) {
-//                    return datacontext.ready();
-//                }]
+                //ready: ['datacontext', function (datacontext) {
+                // return datacontext.ready();
+                // }]
             };
         }
     }
