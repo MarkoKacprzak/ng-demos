@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - ng-bind-html</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <div id="testPanel" class="panel">
+        <h3 class="panel-header">Nazwa {{name}}</h3>
+        <span ng-cloak>{{tempText}}</span>
+        <span x:ng:cloak>{{tempText}}</span>
+        <pre ng-bind-html="test"></pre>
+        <pre ng-bind-template="{{tempText}} - {{name}}! tez znaki !@#!@@#%@#$!@_+"></pre>
+    </div>
+
+
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.js">
+    </script>
+    <script src="https://code.angularjs.org/1.4.0-beta.5/angular-sanitize.js"></script>
+    <script>
+        var app = angular.module('app', ['ngSanitize'])
+            .controller('defaultCtrl', function($scope) {
+                $scope.test = '<a href="5.2.html">link</a> inny kod HTML';
+                $scope.tempText = "123";
+                $scope.name = "ABC";
+            });
+    </script>
+</body>
+
+</html>
