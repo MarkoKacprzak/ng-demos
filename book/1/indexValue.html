@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - value</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div ng-controller="defaultCtrl">
+        <pre>
+            $scope.objectValue={{objectValue}};
+            $scope.stringValue={{stringValue}};
+            $scope.numberValue={{numberValue}};
+        </pre>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.js">
+    </script>
+    <script>
+        var app = angular.module('app', []);
+        app.value("numberValue", 100);
+        app.value("stringValue", "AngularJS")
+        app.value("objectValue", {
+            v1: 123,
+            v2: "ABCD",
+            v3: {
+                "v31": "ABCD"
+            }
+        });
+
+        app.controller('defaultCtrl', ['$scope', 'objectValue', 'stringValue', 'numberValue',
+            function($scope, objectValue, stringValue, numberValue) {
+                console.log(objectValue);
+                console.log(stringValue);
+                console.log(numberValue);
+                $scope.numberValue = numberValue;
+                $scope.objectValue = objectValue;
+                $scope.stringValue = stringValue;
+            }
+        ]);
+    </script>
+</body>
+
+</html>

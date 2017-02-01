@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - directive</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- <div my-directive2 my-directive3 my-directive4 my-directive1 /> 
+    <div my-directive2/>
+    <div my-directive4/>
+    <div my-directive1/>
+    <div my-directive3/>
+-->
+    <div my-directive2></div>
+    <div my-directive4></div>
+    <div my-directive1></div>
+    <div my-directive3></div>
+    <div data-directive5></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.js">
+    </script>
+    <script>
+        var app = angular.module('app', []);
+        app.directive('dataDirective5', function() {
+            return {
+                priority: 5,
+                terminal: false,
+                link: function() {
+                    console.log("Dyrektywa 5.");
+                }
+            }
+        });
+        app.directive('myDirective1', function() {
+            return {
+                priority: 1,
+                terminal: false,
+                link: function() {
+                    console.log("Dyrektywa 1.");
+                }
+            }
+        });
+        app.directive('myDirective2', function() {
+            return {
+                priority: 2,
+                terminal: true,
+                link: function() {
+                    console.log("Dyrektywa 2.");
+                }
+            }
+        });
+        app.directive('myDirective3', function() {
+            return {
+                priority: 3,
+                terminal: false,
+                link: function() {
+                    console.log("Dyrektywa 3.");
+                }
+            }
+        });
+        app.directive('myDirective4', function() {
+            return {
+                priority: 4,
+                terminal: false,
+                link: function() {
+                    console.log("Dyrektywa 4.");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

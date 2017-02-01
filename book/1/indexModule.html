@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - module</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div ng-controller="defaultCtrl">
+        <pre>
+            viewTest = {{stringValue}}
+            stringValue2={{stringValue2}}
+        </pre>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.js">
+    </script>
+    <script>
+        var app2 = angular.module('app2', []);
+        app2.value("stringValue2", "Moduł 2");
+        var app = angular.module('app', ['app2']);
+        app.value("stringValue", "AngularJS");
+
+        app.controller('defaultCtrl', function($scope, stringValue, stringValue2) {
+            $scope.stringValue = stringValue;
+            $scope.stringValue2 = stringValue2;
+        });
+    </script>
+</body>
+
+</html>

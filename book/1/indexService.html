@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - service</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div ng-controller="defaultCtrl">
+        <pre>
+            $scope.newValue = {{newValue}};
+            $scope.newValue2= {{newValue2}};
+        </pre>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.js">
+    </script>
+    <script>
+        var app = angular.module('app', []);
+        app.value("stringValue", "AngularJS");
+
+        function OneService() {
+            this.printLog = function() {
+                    console.log("Log z serwisu AngularJS");
+                },
+                this.newValue = function() {
+                    return "Nowa wartość z serwisu!";
+                }
+        };
+        app.service("oneService", OneService);
+        app.service("twoService", function() {
+            this.printLog = function() {
+                    console.log("Log z 2 serwisu AngularJS");
+                },
+                this.newValue = function() {
+                    return "Nowa wartość z 2 serwisu!";
+                }
+        });
+
+        app.controller('defaultCtrl', ['$scope', 'oneService', 'twoService',
+            function($scope, oneService, twoService) {
+                oneService.printLog();
+                $scope.newValue = oneService.newValue();
+                twoService.printLog();
+                $scope.newValue2 = twoService.newValue();
+            }
+        ]);
+    </script>
+</body>
+
+</html>

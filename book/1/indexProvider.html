@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - provider</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div ng-controller="defaultCtrl">
+        <pre>
+            viewTest = {{viewTest}}
+        </pre>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.js">
+    </script>
+    <script>
+        var app = angular.module('app', []);
+        app.value("stringValue", "AngularJS");
+
+        app.controller('defaultCtrl', function($scope, oneProv) {
+            $scope.viewTest = oneProv.viewTest();
+            oneProv.printLog();
+        });
+        app.provider("oneProv", function() {
+            var provider = {};
+            var config = {
+                paramOne: "jest nesamowity!"
+            };
+            provider.addConfig = function(paramOne) {
+                config.paramOne = paramOne;
+            };
+            provider.$get = function(stringValue) {
+                var service = {};
+                service.printLog = function() {
+                        console.log("Log z providera" + stringValue + config.paramOne);
+                    },
+                    service.viewTest = function() {
+                        return "Log z providera:" + stringValue + config.paramOne;
+                    }
+                return service;
+            }
+            console.log(provider);
+            return provider;
+        });
+
+        app.config(function(oneProvProvider) {
+            oneProvProvider.addConfig(" nowa konfiguracja ");
+        });
+    </script>
+</body>
+
+</html>
