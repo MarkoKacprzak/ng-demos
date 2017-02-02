@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - directive ngClass zastosowane dla tabeli</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Góra</th>
+                <th>Metry</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="m in mountainsList | orderBy:sorting" data-ng-class="{warning: m.metres<8500, danger: m.metres>8600}">
+                <td>{{m.mountain}}</td>
+                <td>{{m.metres}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="text" data-ng-model="search" style="width: 80px" />
+    <ul>
+        <li data-ng-repeat="mountain in mountainsList | filter:search">{{mountain.mountain}}</li>
+    </ul>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+        app.controller('defaultCtrl', function($scope) {
+            $scope.sorting = '-metres';
+
+            $scope.mountainsList = [{
+                mountain: "Mount Everest",
+                metres: 8850
+            }, {
+                mountain: "K2",
+                metres: 8611
+            }, {
+                mountain: "Kangczendzonga",
+                metres: 8598
+            }, {
+                mountain: "Lhotse",
+                metres: 8501
+            }, {
+                mountain: "Makalu",
+                metres: 8463
+            }, {
+                mountain: "Cho Oyu",
+                metres: 8201
+            }];
+        });
+    </script>
+</body>
+
+</html>
