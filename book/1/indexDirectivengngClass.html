@@ -25,6 +25,30 @@
     <ul>
         <li data-ng-repeat="mountain in mountainsList | filter:search">{{mountain.mountain}}</li>
     </ul>
+    <table class="table">
+        <tr data-ng-repeat="mountain in mountainsList" data-ng-class="{info:$even, danger:$odd}">
+            <td class="col-sm-1">{{$index}}</td>
+            <td class="col-sm-4" data-ng-show="!showForm" data-ng-click="showForm=true">{{mountain.mountain}}</td>
+            <td class="col-sm-4" data-ng-show="showForm">
+                <input data-ng-model="mountain.mountain" />
+            </td>
+            <td class="col-sm-4" data-ng-show="!showForm" data-ng-click="showForm=true">{{mountain.metres}}</td>
+            <td class="col-sm-3" data-ng-show="showForm">
+                <input data-ng-model="mountain.metres" />
+                <a href="#" data-ng-click="saveChanges($index, mountain.mountain, mountain.metres);showForm=false" class="glyphicon glyphicon-ok">
+                    Zapisz</a></td>
+            <td class="col-sm-1">
+                <a href="#" data-ng-click="showForm=true" class="glyphicon glyphicon-pencil"></a>
+            </td>
+            <td class="col-sm-1">
+                <a href="#" data-ng-show="!$first" data-ng-click="up($index)" class="glyphicon glyphicon-arrow-up"></a>
+            </td>
+            <td class="col-sm-1">
+                <a href="#" data-ng-show="!$last" data-ng-click="down($index)" class="glyphicon glyphicon-arrow-down"></a>
+            </td>
+        </tr>
+    </table>
+
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
@@ -52,6 +76,27 @@
                 mountain: "Cho Oyu",
                 metres: 8201
             }];
+
+            var drive = function(source, target) {
+                var t = $scope.mountainsList[target];
+                $scope.mountainsList[target] = $scope.mountainsList[source];
+                $scope.mountainsList[source] = t;
+            };
+
+            $scope.up = function(index) {
+                drive(index, index - 1);
+            };
+
+            $scope.down = function(index) {
+                drive(index, index + 1);
+            };
+
+            $scope.saveChanges = function(index, mountain, metres) {
+                $scope.mountainsList[index] = {
+                    'mountain': mountain,
+                    'metres': metres
+                };
+            };
         });
     </script>
 </body>
