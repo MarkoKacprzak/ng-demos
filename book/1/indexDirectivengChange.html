@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - directive ngChange</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <div>
+        <div>
+            Pokaż / ukryj przyciski
+            <input type="checkbox" data-ng-model="showButtons" /><br/> Pokaż / ukryj listę rozwijaną
+            <input type="checkbox" data-ng-model="selectionList" />
+        </div>
+        <div data-ng-show="showButtons">
+            <button type="button" class="btn btn-primary btn-sm" data-ng-repeat="file in files" data-ng-click="getFileData(file)">{{file.name}}</button>
+        </div>
+        <div data-ng-show="selectionList">
+            <select data-ng-model="file" data-ng-change="getFileData(file)" data-ng-options="file as file.name for file in files">
+        </select>
+        </div>
+        <pre data-ng-show="fileData">
+        Nazwa: {{fileData.data.nazwa}}
+        Autor: {{fileData.data.autor | uppercase}}
+        Data: {{fileData.data.data | date}}
+        URL: {{fileData.config.url}}
+    </pre>
+        <pre data-ng-show="fileData">{{fileData|json}}</pre>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-resource.js"></script>
+    <script>
+        var app = angular.module('app', ['ngResource']);
+        app.controller('defaultCtrl', function($scope, FileDataService) {
+            $scope.files = [{
+                name: 'Plik 1.',
+                URL: 'plik-testowy-1.json'
+            }, {
+                name: 'Plik 2.',
+                URL: 'plik-testowy-2.json'
+            }, {
+                name: 'Plik 3.',
+                URL: 'plik-testowy-3.json'
+            }];
+            $scope.getFileData = function(file) {
+                FileDataService.getFileData(file).then(function(result) {
+                    $scope.fileData = result;
+                }, function(result) {
+                    alert('Wystąpił błąd!');
+                });
+            };
+        });
+        app.$inject = ['$scope', 'FileDataService'];
+        app.factory('FileDataService', ['$http', '$q', function($http) {
+            var factory = {
+                getFileData: function(file) {
+                    console.log(file);
+                    var data = $http({
+                        method: 'GET',
+                        url: file.URL
+                    });
+                    return data;
+                }
+            }
+            return factory;
+        }]);
+    </script>
+</body>
+
+</html>
