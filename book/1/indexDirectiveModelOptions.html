@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - directive ngModelOptions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+    <style>
+        .my-input {
+            -webkit-transition: all linear 0.7s;
+            transition: all linear 0.7s;
+            background: green;
+        }
+        
+        .my-input.ng-invalid {
+            color: white;
+            background: red;
+        }
+    </style>
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <div class="container">
+        <form name="editUser">
+            <!-- Model uaktualniany jest po opuszczeniu kontrolki -->
+            Imię: <input class="form-control" type="text" name="userName" data-ng-model="user.name" data-ng-model-options="{ updateOn: 'blur' }" />
+            <br />
+            <!-- Model uaktualniany jest po 2 sekundach od wpisania ostatniego znaku -->
+            Płeć: <input class="form-control" type="text" name="userSex" data-ng-model="user.sex" data-ng-model-options="{ debounce: 2000 }" />
+            <br /> Wiek: <input class="form-control" type="number" name="userAge" data-ng-model="user.age" data-ng-model-options="{ getterSetter: true }" ng-keyup="cancel($event)" />
+            <br />
+        </form>
+        <pre>
+            user.name = {{user.name}}
+            user.sex = {{user.sex}}
+            user.age = <span ng-bind="user.age()"></span>
+        </pre>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+        app.controller('defaultCtrl', function($scope) {
+            var _age = 25;
+            $scope.user = {
+                age: function(newAge) {
+                    return angular.isDefined(newAge) ? (_age = newAge) : _age;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
