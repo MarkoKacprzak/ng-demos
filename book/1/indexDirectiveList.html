@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - directive ngList</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <input data-ng-model="mountainList" data-ng-list> separator "," <br />
+    <input data-ng-model="mountainList" data-ng-list="|"> separator "|" <br />
+    <input data-ng-model="mountainList" data-ng-list="@"> separator "@" <br /> {{mountainList}}
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+        app.controller('defaultCtrl', function($scope) {
+            $scope.mountainList = [
+                "Mount Everest",
+                "K2",
+                "Makalu",
+                "Cho Oyu"
+            ];
+        });
+    </script>
+</body>
+
+</html>
