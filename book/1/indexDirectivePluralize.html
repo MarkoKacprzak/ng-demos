@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - directive ngPluralize</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <div class="container">
+        <h2 class="bg-primary">
+            <ng-pluralize count="mountainsList.length" offset="3" when="{
+               '0': '{{text.t0}}',
+               '1': '{{mountain1}} {{text.t1}}',
+               '2': '{{mountain1}} oraz {{mountain2}} {{text.t2}}',
+               '3': '{{mountain1}}, {{mountain2}}, {{mountain3}} {{text.t3}}',
+               'one': '{{mountain1}}, {{mountain2}}, {{mountain3}} + {{text.one}}',
+               'other': '{{mountain1}}, {{mountain2}}, {{mountain3}} + {} {{text.other}}'}">
+            </ng-pluralize>
+        </h2>
+        <p>Wpisz nazwy gór, rozdzielając je przecinkiem (,). </p>
+        <textarea data-ng-model="mountainsList" ng-list="," class="form-control">
+                </textarea><br />
+        <div class="well well-lg">
+            <span data-ng-repeat="p in mountainsList track by $index">{{$index}} - {{p}}<br />
+               </span>
+        </div>
+        <div class="btn-group">
+            <button data-ng-click="clear()" class="btn btn-danger">Wyczyść formularz</button>
+            <button data-ng-click="resetownia()" class="btn btn-success">Przywróć dane wejściowe</button>
+        </div>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+        <script>
+            var app = angular.module('app', []);
+            app.controller('defaultCtrl', function($scope) {
+                $scope.mountainsList = [
+                    "Mount Everest",
+                    "K2",
+                    "Kangczendzonga",
+                    "Lhotes",
+                    "Makalu",
+                    "Cho Oyu"
+                ];
+                $scope.text = {
+                    't0': 'Tablica jest pusta.',
+                    't1': 'znajduje się w tablicy.',
+                    't2': 'znajdują się w tablicy.',
+                    't3': 'znajdują się w tablicy!',
+                    'one': 'jeszcze jedna nazwa, znajdują się w tablicy.',
+                    'other': 'nazwy znajdują się w tablicy'
+                };
+                $scope.orginalMountainsList = [];
+                angular.copy($scope.mountainsList, $scope.orginalMountainsList);
+
+                $scope.resetownia = function() {
+                    $scope.mountainsList = $scope.orginalMountainsList;
+                };
+                $scope.clear = function() {
+                    $scope.mountainsList = [];
+                };
+                $scope.$watch('mountainsList', function() {
+                    $scope.mountain1 = ($scope.mountainsList[0] ? $scope.mountainsList[0] : null);
+                    $scope.mountain2 = ($scope.mountainsList[1] ? $scope.mountainsList[1] : null);
+                    $scope.mountain3 = ($scope.mountainsList[2] ? $scope.mountainsList[2] : null);
+                });
+            });
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Angular - directive ngNonBindable and ngPluralize</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <div>Bindable: {{name + " " + age}}</div>
+    <div data-ng-non-bindable>Non-Bindable:{{name + " "+age}}</div>
+    <div ng-repeat="i in [1,5,3]">
+        {{i}} -
+        <ng-pluralize count='i' when="{
+            '1': 'programista',
+            'other':'programistów'
+        }" />
+    </div>
+    <div ng-repeat="i in [1,5,3]">
+        Liczba osób: {{i}} - lider zespołu
+        <ng-pluralize offset=1 count='i' when="{
+            '2': '+ {} programista',
+            'other':'+ {} programistów'
+        }" />
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+        app.controller('defaultCtrl', function($scope) {
+            $scope.name = "Tree";
+            $scope.age = 23;
+        });
+    </script>
+</body>
+
+</html>
