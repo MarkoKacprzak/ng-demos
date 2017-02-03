@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - directive ngCopy</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <button ng-dblclick="count = count + 1" ng-init="count=0">{{count}}</button>
+    <button ng-click="countc = countc + 1" ng-init="countc=0">{{countc}}</button>
+    <a data-ng-href="http://google.com/{{countc}}">google id: {{countc}}</a>
+    <div class="contrainer">
+        <div data-ng-repeat="mountain in mountainsList">
+            <textarea data-ng-cut="cut=true" data-ng-focus="f=true">{{$index+1}}. {{mountain.mountain}} - {{mountain.metres}}</textarea>
+            <div class="text-danger" data-ng-show="cut">
+                Uwaga część tekstu <b>"{{mountain.mountain}} - {{mountain.metres}}"</b> o ID={{$index}} została wycięta!
+            </div>
+            <div class="text-success" data-ng-show="f">Jesteś wew elementu o id={{$index}}!</div>
+
+            <div data-ng-copy="copied=true">{{$index+1}}. {{mountain.mountain}} - {{mountain.metres}}</div>
+            <div class="text-danger" data-ng-show="copied">
+                Uwaga tekst <b>"{{mountain.mountain}} - {{mountain.metres}}"</b> o ID={{$index}} został skopiowany!
+            </div>
+        </div>
+        <div data-ng-init="checked=true">
+            <a href="#" data-ng-click="checked=false">Ukryj</a>
+            <a href="#" data-ng-click="checked=true">Pokaż</a>
+            <span data-ng-if="checked"> Text </span>
+        </div>
+
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+        <script>
+            var app = angular.module('app', []);
+            app.controller('defaultCtrl', function($scope) {
+                $scope.copied = false;
+
+                $scope.mountainsList = [{
+                    mountain: "Mount Everest",
+                    metres: 8850
+                }, {
+                    mountain: "K2",
+                    metres: 8611
+                }, {
+                    mountain: "Kangczendzonga",
+                    metres: 8598
+                }, {
+                    mountain: "Lhotse",
+                    metres: 8501
+                }, {
+                    mountain: "Makalu",
+                    metres: 8463
+                }, {
+                    mountain: "Cho Oyu",
+                    metres: 8201
+                }];
+
+            });
+        </script>
+</body>
+
+</html>

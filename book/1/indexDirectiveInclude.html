@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+
+<head>
+    <title>Angular - directive ngInclude</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <div>
+        <ng-include src="side1">Ladowianie...</ng-include>
+    </div>
+    <div data-ng-include="side2" autoscroll=""></div>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+        app.controller('defaultCtrl', function($scope) {
+            $scope.side1 = '1.html';
+            $scope.side2 = '2.html';
+
+        });
+    </script>
+</body>
+
+</html>
