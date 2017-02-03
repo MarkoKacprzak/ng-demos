@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="app">
+
+<head>
+    <title>Angular - directive ngController</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+</head>
+
+<body data-ng-controller="defaultCtrl">
+    <!-- main -->
+    <div data-ng-controller="childOneCtrl as ctrl2">
+        <-- one -->
+    </div>
+    <div data-ng-controller="childTwoCtrl as ctrl3">
+        <-- two -->
+            <div data-ng-controller="nextCtrl as ctrl4">
+                <a href="" ng-click="showName()">Imię</a>
+                <-- next -->
+                    <div data-ng-controller="nextTwoCtrl as ctrl5">
+                        <a href="" ng-click="ctrl5.showName()">Imię</a>
+                        <-- nextTwo -->
+                    </div>
+
+            </div>
+    </div>
+
+</body>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-resource.js"></script>
+<script>
+    var app = angular.module('app', ['ngResource']);
+    app.controller('defaultCtrl', function($scope) {});
+    app.controller('childOneCtrl', function($scope) {});
+    app.controller('childTwoCtrl', function($scope) {});
+    app.controller('nextCtrl', function($scope) {
+        $scope.name = "Marek";
+        $scope.showName = function() {
+            alert($scope.name);
+            $scope.$apply();
+        };
+    });
+    app.controller('nextTwoCtrl', nextTwoCtrl);
+
+    function nextTwoCtrl() {
+        this.name = "Marek2";
+    }
+    nextTwoCtrl.prototype.showName = function() {
+        alert(this.name);
+    };
+</script>
+</body>
+
+</html>
