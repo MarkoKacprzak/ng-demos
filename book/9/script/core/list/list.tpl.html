@@ -25,6 +25,11 @@
         </table>
     </div>
 </div>
+<pre>
+    <div data-ng-repeat="todo in todos">
+    {{todo | json}}
+    </div>
+</pre>
 <div class="panel panel-default">
     <div class="panel-body">
         <button class="btn btn-danger" data-ng-click="deleteCompleted()">
