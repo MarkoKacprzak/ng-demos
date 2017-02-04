@@ -29,7 +29,14 @@
             <button data-ng-click="clear()" class="btn btn-danger">Wyczyść formularz</button>
             <button data-ng-click="resetownia()" class="btn btn-success">Przywróć dane wejściowe</button>
         </div>
-        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <select ng-model="selectNumber">
+            <option value="">Wybierz liczbę produktów ... </option>
+            <option ng-repeat="number in [1, 2, 3, 4]" ng-pluralize count="number" when="{
+                1: '{{number}} produkt',
+                other: '{{number}} produkty'}">
+                {{number}}</option>
+        </select> Wybrano: {{selectNumber}}
+        <script src="http://cod e.jquery.com/jquery-1.11.1.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
         <script>
