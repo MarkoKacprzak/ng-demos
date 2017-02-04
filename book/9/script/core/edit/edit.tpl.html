@@ -3,7 +3,7 @@
         <h3 class="panel-title">Dodaj zadanie!</h3>
     </div>
     <div class="panel-body">
-        <form name="f" date-ng-submit="addTodo()">
+        <form name="f" data-ng-submit="addTodo()">
             Nazwa:
             <textarea class="form-control" name="newTodo" data-ng-model="formData.newTodo" required /> Typ:
             <select class="form-control" name="type" data-ng-model="formData.type" data-ng-options="value.name for value in categories" required /> Estymowany czas:

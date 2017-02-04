@@ -1,7 +1,13 @@
-app.controller('editCtrl', function($scope, $location, categories) {
+app.controller('editCtrl', function($scope, $location, $filter, categories) {
     $scope.categories = categories;
-    $scope.formData = { type: $scope.categories[0], estimates: $scope.estimates = 1 };
+    $scope.formData = {
+        type: $scope.categories[0],
+        estimates: $scope.estimates = 1,
+        date: $filter('date')(Date.now(), "dd/M/yyyy"),
+        newTodo: 'Test'
+    };
     $scope.addTodo = function() {
+        //   console.log('addTodo');
         $scope.$parent.todos.push({
             'title': $scope.formData.newTodo,
             'done': false,
